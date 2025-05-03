@@ -20,12 +20,6 @@ type Book struct {
 }
 ```
 
-## Installation
-```bash
-git clone https://github.com/yourusername/bookworm
-cd bookworm
-go build
-```
 
 ## Status
 🚧 This project is under active development. More features coming soon!
