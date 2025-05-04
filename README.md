@@ -1,4 +1,4 @@
-# 📚 Bookworm (Work in Progress)
+# 📚 Bookworm
 
 A simple Go program that tracks readers and their book collections.
 
@@ -20,9 +20,6 @@ type Book struct {
 }
 ```
 
-
-## Status
-🚧 This project is under active development. More features coming soon!
 
 ## Contributing
 Feel free to open issues and submit PRs.
