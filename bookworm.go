@@ -49,3 +49,18 @@ func booksCount(bookworms []Bookworm) map[Book]uint {
 
 	return count
 }
+
+// find common books returns books that are on more than one bookworms shelf.
+func findCommonBooks(bookworms []Bookworm) []Book {
+	booksOnShelves := booksCount(bookworms)
+
+	var commonBooks []Book
+
+	for book, count := range booksOnShelves {
+		if count > 1 {
+			commonBooks = append(commonBooks, book)
+		}
+	}
+
+	return commonBooks
+}

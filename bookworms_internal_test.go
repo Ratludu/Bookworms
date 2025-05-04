@@ -129,3 +129,45 @@ func TestBooksCount(t *testing.T) {
 		})
 	}
 }
+
+func TestFindCommonBooks(t *testing.T) {
+
+	tt := map[string]struct {
+		input []Bookworm
+		want  []Book
+	}{
+		"no common book": {
+			input: []Bookworm{
+				{Name: "Fadi", Books: []Book{handmaidsTale, theBellJar}},
+				{Name: "Peggy", Books: []Book{oryxAndCrake, janeEyre}},
+			},
+			want: nil,
+		},
+		"one common book": {
+			input: []Bookworm{
+				{Name: "Fadi", Books: []Book{handmaidsTale, theBellJar}},
+				{Name: "Peggy", Books: []Book{oryxAndCrake, handmaidsTale}},
+			},
+			want: []Book{handmaidsTale},
+		},
+
+		"two common book": {
+			input: []Bookworm{
+				{Name: "Fadi", Books: []Book{handmaidsTale, theBellJar}},
+				{Name: "Peggy", Books: []Book{handmaidsTale, theBellJar}},
+			},
+			want: []Book{handmaidsTale, theBellJar},
+		},
+	}
+
+	for name, tc := range tt {
+		t.Run(name, func(t *testing.T) {
+			got := findCommonBooks(tc.input)
+
+			if !reflect.DeepEqual(got, tc.want) {
+				t.Fatalf(
+					"got a different list of books, got: %v expected: %v", got, tc.want)
+			}
+		})
+	}
+}
