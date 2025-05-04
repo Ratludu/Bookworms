@@ -35,11 +35,11 @@ func TestLoadBookworms_Success(t *testing.T) {
 			got, err := loadBookworms(testCase.bookwormsFile)
 
 			if err != nil && !testCase.wantErr {
-				t.Fatalf("expected an error %s, got none", err.Error())
+				t.Fatalf("expected an error %s, got none", err)
 			}
 
 			if err == nil && testCase.wantErr {
-				t.Fatalf("expected no error, got one %s", err.Error())
+				t.Fatalf("expected no error, got one %s", err)
 			}
 
 			if !reflect.DeepEqual(got, testCase.want) {

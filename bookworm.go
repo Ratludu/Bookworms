@@ -2,7 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
+	"sort"
 )
 
 type Bookworm struct {
@@ -62,5 +64,42 @@ func findCommonBooks(bookworms []Bookworm) []Book {
 		}
 	}
 
-	return commonBooks
+	return sortBooks(commonBooks)
+}
+
+// Implementing sort.Interface on Books
+// byAuthor is a list of book
+// Defining a custom type to implement sort.interface
+type byAuthor []Book
+
+// Len implements sort.Interface by returning the length of the BookbyAuthor
+func (b byAuthor) Len() int { return len(b) }
+
+// Swap implements sort.interfaces and dwaps two books
+func (b byAuthor) Swap(i, j int) {
+	b[i], b[j] = b[j], b[i]
+}
+
+// Less implements the sort.Interface and returns books sorted by Author and then Title
+func (b byAuthor) Less(i, j int) bool {
+	if b[i].Author != b[j].Author {
+		return b[i].Author < b[j].Author
+	}
+
+	return b[i].Title < b[j].Title
+}
+
+// sortBooks sorts the books by Author and then Title
+func sortBooks(books []Book) []Book {
+
+	sort.Sort(byAuthor(books))
+	
+	return books
+}
+
+// displayBooks print out the titles and authors of a list of books
+func displayBooks(books []Book) {
+	for _, book := range books {
+		fmt.Println("-", book.Title, "by", book.Author)
+	}
 }
